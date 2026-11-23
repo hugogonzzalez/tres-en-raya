@@ -1,4 +1,4 @@
-// TODO (paso 1): importa Square
+import Square from "./Square"
 // TODO (paso 2): importa useState desde 'react'
 // TODO (paso 4): importa calculateWinner desde '../utils/calculateWinner'
 
@@ -24,6 +24,21 @@ function Board() {
       {/* TODO (paso 4): <div className="status"> con el texto de estado */}
 
       {/* TODO (paso 1): tres filas <div className="board-row">, cada una con 3 Square */}
+      <div className="board-row">
+        <Square />
+        <Square />
+        <Square />
+      </div>
+      <div className="board-row">
+        <Square />
+        <Square />
+        <Square />
+      </div>
+      <div className="board-row">
+        <Square />
+        <Square />
+        <Square />
+      </div>
       <p>Aquí irá el tablero</p>
     </>
   )
