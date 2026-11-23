@@ -5,12 +5,11 @@
 // Props que acabará recibiendo:
 //   value         -> 'X', 'O' o null
 //   onSquareClick -> función que se ejecuta al hacer clic
-  function Square({value}){
+  function Square({value, onSqueareClick}){
   return (
-    <button className="square">
+    <button className="square" onClick={onSqueareClick}>
       {value}
     </button>
-    // TODO (paso 2): añade el evento onClick al botón
   )
 }
 
