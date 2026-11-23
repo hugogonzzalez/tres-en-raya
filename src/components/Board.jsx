@@ -9,19 +9,27 @@ import { useState } from "react"
 function Board() {
   // TODO (paso 2): estado squares -> array de 9 posiciones a null
   const [squares, setSquares] = useState(Array(9).fill(null))
+
   // TODO (paso 3): estado xIsNext -> true
+  const [xIsNext, setXIsNext] = useState(true)
 
   // TODO (paso 2): función handleClick(i)
   function handleClick(i){
+    if (squares[i] !== null) {
+    return
+    }
+
     const nombre = squares.slice()
-    nombre[i] = "X"
+    nombre[i] = valor
 
     setSquares(nombre)
+    setXIsNext(!xIsNext)
+
   }
-  //   - copia el array (no lo modifiques directamente)
-  //   - escribe 'X' en la posición i de la copia
-  //   - guarda la copia en el estado
+
   // TODO (paso 3): alterna 'X' y 'O' y no permitas pulsar una casilla ocupada
+  const valor = xIsNext ? "X" : "O"
+
   // TODO (paso 4): no permitas jugar si ya hay ganador
 
   // TODO (paso 4): texto de estado -> "Ganador: X" o "Siguiente jugador: O"
@@ -32,19 +40,19 @@ function Board() {
 
       {/* TODO (paso 1): tres filas <div className="board-row">, cada una con 3 Square */}
       <div className="board-row">
-        <Square value={squares[0]} onSqueareClick={() => handleClick(0)}/>
-        <Square value={squares[1]} onSqueareClick={() => handleClick(1)}/>
-        <Square value={squares[2]} onSqueareClick={() => handleClick(2)}/>
+        <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
+        <Square value={squares[1]} onSquareClick={() => handleClick(1)}/>
+        <Square value={squares[2]} onSquareClick={() => handleClick(2)}/>
       </div>
       <div className="board-row">
-        <Square value={squares[3]} onSqueareClick={() => handleClick(3)}/>
-        <Square value={squares[4]} onSqueareClick={() => handleClick(4)}/>
-        <Square value={squares[5]} onSqueareClick={() => handleClick(5)}/>
+        <Square value={squares[3]} onSquareClick={() => handleClick(3)}/>
+        <Square value={squares[4]} onSquareClick={() => handleClick(4)}/>
+        <Square value={squares[5]} onSquareClick={() => handleClick(5)}/>
       </div>
       <div className="board-row">
-        <Square value={squares[6]} onSqueareClick={() => handleClick(6)}/>
-        <Square value={squares[7]} onSqueareClick={() => handleClick(7)}/>
-        <Square value={squares[8]} onSqueareClick={() => handleClick(8)}/>
+        <Square value={squares[6]} onSquareClick={() => handleClick(6)}/>
+        <Square value={squares[7]} onSquareClick={() => handleClick(7)}/>
+        <Square value={squares[8]} onSquareClick={() => handleClick(8)}/>
       </div>
     </>
   )
