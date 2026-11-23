@@ -1,17 +1,14 @@
 import Square from "./Square"
-import { useState } from "react"
 import { calculateWinner } from "../utils/calculateWinner"
 
 // Componente: el tablero de 3 x 3 y el texto de estado.
 // Pasos 2-4: el tablero guarda su propio estado (squares, xIsNext).
 // Paso 5: el estado sube a Game y Board pasa a recibir las props
 //         xIsNext, squares y onPlay.
-function Board() {
+function Board({xIsNext, squares, onPlay}) {
   // TODO (paso 2): estado squares -> array de 9 posiciones a null
-  const [squares, setSquares] = useState(Array(9).fill(null))
 
   // TODO (paso 3): estado xIsNext -> true
-  const [xIsNext, setXIsNext] = useState(true)
 
   // TODO (paso 2): función handleClick(i)
   const valor = xIsNext ? "X" : "O"
@@ -30,8 +27,7 @@ function Board() {
     const nombre = squares.slice()
     nombre[i] = valor
 
-    setSquares(nombre)
-    setXIsNext(!xIsNext)
+    onPlay(nombre)
   }
 
   
