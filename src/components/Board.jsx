@@ -1,6 +1,6 @@
 import Square from "./Square"
 import { useState } from "react"
-// TODO (paso 4): importa calculateWinner desde '../utils/calculateWinner'
+import { calculateWinner } from "../utils/calculateWinner"
 
 // Componente: el tablero de 3 x 3 y el texto de estado.
 // Pasos 2-4: el tablero guarda su propio estado (squares, xIsNext).
@@ -14,9 +14,17 @@ function Board() {
   const [xIsNext, setXIsNext] = useState(true)
 
   // TODO (paso 2): función handleClick(i)
-  function handleClick(i){
+  const valor = xIsNext ? "X" : "O"
+
+  const ganador = calculateWinner(squares)
+
+  function handleClick(i) {
+    if (calculateWinner(squares) != null) {
+      return
+    }
+
     if (squares[i] !== null) {
-    return
+      return
     }
 
     const nombre = squares.slice()
@@ -24,19 +32,23 @@ function Board() {
 
     setSquares(nombre)
     setXIsNext(!xIsNext)
-
   }
 
+  
+
   // TODO (paso 3): alterna 'X' y 'O' y no permitas pulsar una casilla ocupada
-  const valor = xIsNext ? "X" : "O"
 
   // TODO (paso 4): no permitas jugar si ya hay ganador
+
 
   // TODO (paso 4): texto de estado -> "Ganador: X" o "Siguiente jugador: O"
 
   return (
     <>
       {/* TODO (paso 4): <div className="status"> con el texto de estado */}
+      <div className="status">
+        {ganador ? "Ganador: " + ganador : "Siguiente jugador: " + valor}
+      </div>
 
       {/* TODO (paso 1): tres filas <div className="board-row">, cada una con 3 Square */}
       <div className="board-row">

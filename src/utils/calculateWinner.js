@@ -18,5 +18,13 @@ const LINEAS = [
 // tienen el mismo valor (y no están vacías), devuelve ese valor ('X' u 'O').
 // Si ninguna línea está completa, devuelve null.
 export function calculateWinner(squares) {
+  for (const linea of LINEAS){
+
+    const [a, b, c] = linea
+
+    if (squares[a] != null && squares[a] === squares[b] && squares[a] === squares[c]){
+      return squares[a]
+    }
+  }
   return null
 }
