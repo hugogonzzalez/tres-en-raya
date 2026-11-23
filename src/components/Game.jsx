@@ -9,22 +9,41 @@ function Game() {
   // TODO (paso 5): estado history -> array con un único tablero vacío
   const [history, setHistory] = useState([Array(9).fill(null)])
   // TODO (paso 5): estado xIsNext -> true (en el paso 6 lo sustituirás por un valor calculado)
-  const [xIsNext, setXIsNext] = useState(true)
   // TODO (paso 6): estado currentMove -> 0
+  const [currentMove, setCurrentMove] = useState(0)
 
   // TODO (paso 5): valor derivado currentSquares -> el último tablero del historial
   //                (en el paso 6: el tablero del movimiento actual)
-  const currentSquares = history[history.length - 1]
+  const currentSquares = history[currentMove]
+
+  const xIsNext= currentMove % 2 === 0
 
   // TODO (paso 5): función handlePlay(nextSquares)
   function handlePlay(nextSquares) {
-    const nextHistory = [...history, nextSquares]
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares]
     setHistory(nextHistory)
-    setXIsNext(!xIsNext)
+    setCurrentMove(nextHistory.length - 1)
   }
   // TODO (paso 6): función jumpTo(nextMove)
+  function jumpTo(nextMove) {
+  setCurrentMove(nextMove)
+}
 
   // TODO (paso 6): lista "moves" con un <li> y un botón por cada tablero del historial
+  const moves = history.map((squares, move) => {
+    let description
+    if(move > 0) {
+      description = 'Ir al movimiento #' + move
+    } else {
+      description = 'Ir al inicio de la partida'
+    }
+
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{description}</button>
+      </li>
+    )
+  })
 
   return (
     <div className="game">
@@ -33,7 +52,7 @@ function Game() {
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        {/* TODO (paso 6): <ol> con la lista de movimientos */}
+        <ol>{moves}</ol>
       </div>
     </div>
   )
